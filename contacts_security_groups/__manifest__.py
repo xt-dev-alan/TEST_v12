@@ -11,7 +11,7 @@
     """,
     'author': "XETECHS",
     "website": "",
-    'depends': ['account','base','account_reports'],
+    'depends': ['account','base','account_reports','crm'],
     'data': [
         'security/ir.model.access.csv',
         'views/permissions.xml',
