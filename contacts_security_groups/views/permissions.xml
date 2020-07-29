@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="res_partner_view_form_inherit">
+            <field name="name">res.partner.view.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_reports.res_partner_view_form"/>
+            <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='open_action_followup']" position="replace">
+                    <button type="object" class="oe_stat_button" name="open_action_followup" icon="fa-list"  groups="sales_team.group_sale_salesman">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value"><field name="total_due" widget='monetary' options="{'currency_field': 'currency_id'}"/></span>
+                            <span class="o_stat_text">Due</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="res_partner_view_buttons_inherit">
+            <field name="name">sale.res_partner_view_buttons_inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sale.res_partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='295']" position="replace">
+                    <field name="is_salesman" invisible="1"/>
+                    <button class="oe_stat_button" type="action" name="295"
+                            groups="sales_team.group_sale_salesman"
+                            attrs="{'invisible': ['|',('customer', '=', False), ('is_salesman', '=', True)]}"
+                            icon="fa-star"
+                    >
+                        <field string="Sales" name="sale_order_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_partners_form_crm1_inherit">
+            <field name="name">opportunity.res_partner_view_buttons_inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="crm.view_partners_form_crm1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='420']" position="replace">
+                    <button class="oe_stat_button o_res_partner_tip_opp" type="action" attrs="{'invisible': ['|',('customer', '=', False), ('is_salesman', '=', True)]}" name="420" icon="fa-star" groups="sales_team.group_sale_salesman" context="{'search_default_partner_id': active_id}">
+                        <field string="Opportunities" name="opportunity_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_partners_form_crm1_inherit_2">
+            <field name="name">opportunity.res_partner_view_buttons_inherit_2</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="crm.view_partners_form_crm1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='schedule_meeting']" position="replace">
+                    <button class="oe_stat_button" type="object" name="schedule_meeting" icon="fa-calendar" groups="sales_team.group_sale_salesman" context="{'partner_id': active_id, 'partner_name': name}" attrs="{'invisible': [('is_salesman', '=', True)]}">
+                        <field string="Meetings" name="meeting_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
