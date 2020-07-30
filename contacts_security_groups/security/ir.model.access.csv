@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_account_move_salesman,Asientos contables,account.model_account_move,sales_team.group_sale_salesman,1,1,0,0
-access_account_report_manager_salesman,Administrar Resumen y Notas al pie de Pagina de los informes,account_reports.model_account_report_manager,sales_team.group_sale_salesman,1,1,0,0
+access_account_report_manager_salesman,Administrar Resumen y Notas al pie de Pagina de los informes,account_reports.model_account_report_manager,sales_team.group_sale_salesman,1,1,1,0

@@ -11,7 +11,24 @@
                     <button type="object" class="oe_stat_button" name="open_action_followup_sales" icon="fa-list" attrs="{'invisible': [('is_salesman', '=', False)]}">
                         <div class="o_field_widget o_stat_info">
                             <span class="o_stat_value"><field name="total_due" widget='monetary' options="{'currency_field': 'currency_id'}"/></span>
-                            <span class="o_stat_text">Dues</span>
+                            <span class="o_stat_text">Due</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="res_partner_view_form_inherit_filter">
+            <field name="name">res.partner.view.form.inherit.filter</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_reports.res_partner_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='open_action_followup']" position="replace">
+                    <field name="is_salesman" invisible="1" />
+                    <button type="object" class="oe_stat_button" name="open_action_followup" icon="fa-list" attrs="{'invisible': [('is_salesman', '=', True)]}">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value"><field name="total_due" widget="monetary" options="{'currency_field': 'currency_id'}"/></span>
+                            <span class="o_stat_text">Due</span>
                         </div>
                     </button>
                 </xpath>
