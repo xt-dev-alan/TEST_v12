@@ -13,8 +13,8 @@
     "website": "",
     'depends': ['account','base','account_reports','crm'],
     'data': [
-        'security/ir.model.access.csv',
         'views/permissions.xml',
+        'security/ir.model.access.csv',
         'views/res_users.xml',
     ],
     'demo': [],
