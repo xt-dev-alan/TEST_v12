@@ -16,7 +16,7 @@ class SaleOrder(models.Model):
             ('partner_id', '=', partner.id)], limit=1)
         if user_id and not user_id.has_group('base.group_portal') or not \
                 user_id:
-            moveline_obj = self.env['account.move.line']
+            moveline_obj = self.env['account.move.line'].with_context(lang='en')
             movelines = moveline_obj.search(
                 [('partner_id', '=', partner.id),
                  ('account_id.user_type_id.name', 'in',
@@ -31,6 +31,7 @@ class SaleOrder(models.Model):
             for line in movelines:
                 credit += line.credit
                 debit += line.debit
+            print(partner.credit_limit, debit, credit, amount_total)
             partner_credit_limit = (partner.credit_limit - debit) + credit
             available_credit_limit = \
                 ((partner_credit_limit -
